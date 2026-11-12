@@ -1,22 +1,18 @@
-"""Turn-based combat manager (Task 5)."""
 from character import Character
  
  
 class Battle:
-    """Manages a turn-based fight between a hero and an enemy."""
  
     def __init__(self, hero: Character, enemy: Character) -> None:
         self.hero = hero
         self.enemy = enemy
  
     def play_round(self) -> None:
-        """Hero attacks enemy; if enemy survives, enemy attacks hero."""
         self.hero.attack(self.enemy)
         if self.enemy.is_alive:
             self.enemy.attack(self.hero)
  
     def simulate_battle(self, verbose: bool = True) -> Character:
-        """Play rounds until one character is dead. Returns the winner."""
         rounds = 0
         while self.hero.is_alive and self.enemy.is_alive:
             rounds += 1
