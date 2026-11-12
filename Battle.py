@@ -1,0 +1,27 @@
+from character import Character
+ 
+ 
+class Battle:
+ 
+    def __init__(self, hero: Character, enemy: Character) -> None:
+        self.hero = hero
+        self.enemy = enemy
+ 
+    def play_round(self) -> None:
+        self.hero.attack(self.enemy)
+        if self.enemy.is_alive:
+            self.enemy.attack(self.hero)
+ 
+    def simulate_battle(self, verbose: bool = True) -> Character:
+        rounds = 0
+        while self.hero.is_alive and self.enemy.is_alive:
+            rounds += 1
+            self.play_round()
+            if verbose:
+                print(f"Round {rounds}: {self.hero.name} {self.hero.hp} HP | "
+                      f"{self.enemy.name} {self.enemy.hp} HP")
+        winner = self.hero if self.hero.is_alive else self.enemy
+        if verbose:
+            print(f"{winner.name} wins after {rounds} rounds!")
+        return winner
+    
